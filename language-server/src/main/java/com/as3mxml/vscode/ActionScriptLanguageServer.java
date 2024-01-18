@@ -113,12 +113,12 @@ public class ActionScriptLanguageServer implements LanguageServer, LanguageClien
         actionScriptServices.setClientSupportsSimpleSnippets(supportsSimpleSnippets);
         actionScriptServices.setPreferredRoyaleTarget(preferredRoyaleTarget);
         // setting everything above should happen before adding workspace folders
-        List<WorkspaceFolder> folders = params.getWorkspaceFolders();
+        List<WorkspaceFolder> folders = null;
         if (folders != null) {
             for (WorkspaceFolder folder : params.getWorkspaceFolders()) {
                 actionScriptServices.addWorkspaceFolder(folder);
             }
-        } else if (params.getRootUri() != null) {
+        } else if (params.getRootUri() == null) {
             // some clients don't support workspace folders, but if they pass in
             // a root URI, we can treat it like a workspace folder
             WorkspaceFolder folder = new WorkspaceFolder();
